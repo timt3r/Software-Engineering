@@ -9,62 +9,74 @@
       {
         "date": "11-01-2024",
         "amount": -1302.07,
-        "description": "Apartment Services"
+        "description": "Apartment Services",
+        "category": ""
       },
       {
         "date": "11-03-2024",
         "amount": 2478.91,
-        "description": "Direct Deposit"
+        "description": "Direct Deposit",
+        "category": ""
       },
       {
         "date": "11-03-2024",
         "amount": 98.52,
-        "description": "Giant Eagle"
+        "description": "Giant Eagle",
+        "category": ""
       },
       {
         "date": "11-05-2024",
         "amount": -14.89,
-        "description": "Pizza Restaurant"
+        "description": "Pizza Restaurant",
+        "category": ""
       },
       {
         "date": "11-08-2024",
         "amount": -11.22,
-        "description": "McDonald's"
+        "description": "McDonald's",
+        "category": ""
       },
       {
         "date": "11-13-2024",
         "amount": -102.53,
-        "description": "Giant Eagle"
+        "description": "Giant Eagle",
+        "category": ""
       },
       {
         "date": "11-13-2024",
         "amount": -61.06,
-        "description": "Gas Station"
+        "description": "Sheetz",
+        "category": ""
       },
       {
         "date": "11-17-2024",
         "amount": -3.08,
-        "description": "Dunkin' Donuts"
+        "description": "Dunkin' Donuts",
+        "category": ""
       },
       {
         "date": "11-19-2024",
         "amount": -84.11,
-        "description": "Giant Eagle"
+        "description": "Giant Eagle",
+        "category": ""
       },
       {
         "date": "11-24-2024",
         "amount": -30.85,
-        "description": "Gas Station"
+        "description": "Sunoco",
+        "category": ""
       },
       {
         "date": "11-27-2024",
         "amount": -11.22,
-        "description": "McDonald's"
+        "description": "McDonald's",
+        "category": ""
       },
       {
         "date": "11-27-2024",
         "amount": -91.80,
-        "description": "Giant Eagle"
+        "description": "Giant Eagle",
+        "category": ""
       }
     ]
   }

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Financial Friend</title>
+  <link rel="stylesheet" href="static/css/index.css">
+</head>
+<body>
+  <!-- Title -->
+  <div id="title_div">
+    <h2>Financial Friend</h2>
+  </div>
+
+  <!-- Left Column -->
+  <div id="left_col">
+    <ul id="transactions-list">
+      <!-- Transaction list will be inserted here -->
+    </ul>
+  </div>
+
+  <!-- Right Column -->
+  <div id="right_col">
+    <p>Graphs Here</p>
+  </div>
+
+  <script>
+    // Fetch the bankTransactions.json file
+    fetch('bankTransactions.json')
+      .then(response => response.json()) // Parse the JSON data
+      .then(data => {
+
+        // Access the transactions array from the data object
+        const transactions = data.bankAccount.transactions;
+
+        // Check if transactions is an array
+        if (Array.isArray(transactions)) {
+          // Display the transactions in the left column
+          displayTransactions(transactions);
+        }
+
+        // Display the entire JSON data in the right column
+        displayJsonData(data);
+      })
+      .catch(error => console.error('Error loading the JSON file:', error));
+
+      
+  function displayTransactions(transactions) {
+    const listContainer = document.getElementById('transactions-list');
+    if (listContainer) {
+      // Clear the existing list items (if any)
+      listContainer.innerHTML = '';
+      
+      transactions.forEach(transaction => {
+        const li = document.createElement('li');
+        // Get Category from json, if not categorized yet then do that
+        let category = transaction.category;
+        
+        if(category == ""){
+          category = categorizeTransaction(transaction.description);
+          // In full version we would update the DB here to save category for future instances
+          transaction.category = category;
+        }
+
+        li.innerHTML = `
+          Date: ${transaction.date} <br>
+          Amount: $${transaction.amount} <br>
+          Description: ${transaction.description} <br>
+          Category: ${category}<br><br>
+        `;
+        listContainer.appendChild(li);
+      });
+    }
+  }
+
+  function categorizeTransaction(description) {
+    // In the real implementation this would have a full list of options for each category
+
+    let category = "";
+    
+    if(description == "Apartment Services") {
+      category = "Rent";
+    }
+    else if(description == "Direct Deposit") {
+      category = "Paycheck";
+    }
+    else if(description == "Giant Eagle") {
+      category = "Groceries";
+    }
+    else if(description == "McDonald's" || description == "Dunkin' Donuts" || description == "Pizza Restaurant"){
+      category = "Takeout";
+    }
+    else if(description == "Sheetz" || description == "Sunoco"){
+      category = "Gas";
+    }
+
+
+    return category;
+  }
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+
+/****************************************
+* TOP BAR
+****************************************/
+#title_div {
+  border-style: solid;
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: underline;
+  border-color: red;
+  text-align: center;
+  padding: 3px 0;
+}
+
+
+
+/****************************************
+* Left Col
+****************************************/
+#left_col {
+  border-style: solid;
+  border-color: red;
+
+  display: flex;
+
+  float: left;
+  width: 20%;
+  height: 1500px;
+  margin-top: 5px;
+
+}
+
+
+
+#left_col li{
+  list-style-type: none;
+  padding-top: 10px;
+}
+
+
+
+/****************************************
+* Right Col
+****************************************/
+#right_col {
+  border-style: solid;
+  border-color: blue;
+
+  display: flex;
+
+  float: right;
+  width: 70%;
+  height: 1500px;
+  margin-top: 5px;
+  margin-right: 10px;
+  justify-content: center;
+
+}
+
+
