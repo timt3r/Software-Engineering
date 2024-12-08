@@ -48,30 +48,32 @@
   function displayTransactions(transactions) {
     const listContainer = document.getElementById('transactions-list');
     if (listContainer) {
-      // Clear the existing list items (if any)
+
       listContainer.innerHTML = '';
-      
-      transactions.forEach(transaction => {
+
+      // Reverse so that newest transaction is at top
+      const reversedTransactions = transactions.slice().reverse();
+
+      reversedTransactions.forEach(transaction => {
         const li = document.createElement('li');
-        // Get Category from json, if not categorized yet then do that
-        let category = transaction.category;
-        
-        if(category == ""){
-          category = categorizeTransaction(transaction.description);
-          // In full version we would update the DB here to save category for future instances
-          transaction.category = category;
-        }
+        let category = transaction.category || categorizeTransaction(transaction.description);
+        transaction.category = category;
+
+        // Determine the color based on negative or positive
+        const color = transaction.amount < 0 ? 'red' : 'green';
 
         li.innerHTML = `
-          Date: ${transaction.date} <br>
-          Amount: $${transaction.amount} <br>
-          Description: ${transaction.description} <br>
-          Category: ${category}<br><br>
+          <b>Date</b>: ${transaction.date} <br>
+          <b>Amount:</b> <span style="color: ${color};">$${transaction.amount}</span> <br>
+          <b>Description:</b> ${transaction.description} <br>
+          <b>Category:</b> ${category}<br><br>
         `;
+
+        // Display in LI
         listContainer.appendChild(li);
       });
     }
-  }
+}
 
   function categorizeTransaction(description) {
     // In the real implementation this would have a full list of options for each category
@@ -92,6 +94,9 @@
     }
     else if(description == "Sheetz" || description == "Sunoco"){
       category = "Gas";
+    }
+    else if(description == "Venmo"){
+      category = "Other Income";
     }
 
 

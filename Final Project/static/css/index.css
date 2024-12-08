@@ -7,7 +7,7 @@
   font-size: 25px;
   font-weight: bold;
   text-decoration: underline;
-  border-color: red;
+  border-color: green; /* Border is just for debugging */
   text-align: center;
   padding: 3px 0;
 }
@@ -19,7 +19,7 @@
 ****************************************/
 #left_col {
   border-style: solid;
-  border-color: red;
+  border-color: red; /* Border is just for debugging */
 
   display: flex;
 
@@ -44,7 +44,7 @@
 ****************************************/
 #right_col {
   border-style: solid;
-  border-color: blue;
+  border-color: blue; /* Border is just for debugging */
 
   display: flex;
 
