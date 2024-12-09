@@ -1,5 +1,5 @@
 // In this implementation, this JS file acts as the server and does data manipulation & processesing
-
+document.addEventListener('DOMContentLoaded', () => {
 // Fetch the bankTransactions.json file
 fetch('bankTransactions.json')
   .then(response => response.json()) // Parse the JSON data
@@ -17,9 +17,12 @@ fetch('bankTransactions.json')
       displayTransactions(transactions);
       displayExpensesPieChart(transactions);
     }
+  
+    console.log(transactions);
 
   })
   .catch(error => console.error('Error loading the JSON file:', error));
+});
 
 
 // Function to list all transactions in the left column of the UI
