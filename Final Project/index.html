@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Financial Friend</title>
+  <script src="static/js/main.js"></script>
   <link rel="stylesheet" href="./static/css/index.css">
   <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
 </head>
@@ -12,7 +13,18 @@
 <body>
   <!-- Title -->
   <div id="title_div">
+    <div id="hamburgerImg">
+      <!-- This does nothing, it is just for looks -->
+      <img src="static/images/hamburger.png" alt="Stuff">
+    </div>
+    <div id="user_info">
+      <!-- Will be replaced with the user's name and account balance -->
+      <p id="userName">name</p>
+      <p id="balance">Account Balance: balance</p>
+    </div>
+
     <h2>Financial Friend</h2>
+    <div></div>
   </div>
 
   <!-- Left Column -->
@@ -24,149 +36,10 @@
 
   <!-- Right Column -->
   <div id="right_col">
-    <p>Graphs Here</p>
+    <!-- Graph is calculated in the JS and sent back to UI -->
+    <p id="expense_graph"></p>
   </div>
 
-  <script>
-    // Fetch the bankTransactions.json file
-    fetch('bankTransactions.json')
-      .then(response => response.json()) // Parse the JSON data
-      .then(data => {
-
-        // Access the transactions array from the data object
-        const transactions = data.bankAccount.transactions;
-
-        // Check if transactions is an array
-        if (Array.isArray(transactions)) {
-          // Display the transactions in the left column
-          displayTransactions(transactions);
-          displayPieChart(transactions);
-        }
-
-        // Display the entire JSON data in the right column
-        displayJsonData(data);
-      })
-      .catch(error => console.error('Error loading the JSON file:', error));
-
-
-    function displayTransactions(transactions) {
-      const listContainer = document.getElementById('transactions-list');
-      if (listContainer) {
-
-        listContainer.innerHTML = '';
-
-        // Reverse so that newest transaction is at top
-        const reversedTransactions = transactions.slice().reverse();
-
-        reversedTransactions.forEach(transaction => {
-          const li = document.createElement('li');
-          let category = transaction.category || categorizeTransaction(transaction.description);
-          transaction.category = category;
-
-          // Determine the color based on negative or positive
-          const color = transaction.amount < 0 ? 'red' : 'green';
-
-          li.innerHTML = `
-          <b>Date</b>: ${transaction.date} <br>
-          <b>Amount:</b> <span style="color: ${color};">$${transaction.amount}</span> <br>
-          <b>Description:</b> ${transaction.description} <br>
-          <b>Category:</b> ${category}<br><br>
-        `;
-
-          // Display in LI
-          listContainer.appendChild(li);
-        });
-      }
-    }
-
-    function categorizeTransaction(description) {
-      // In the real implementation this would have a full list of options for each category
-
-      let category = "";
-
-      if (description == "Apartment Services") {
-        category = "Rent";
-      }
-      else if (description == "Direct Deposit") {
-        category = "Paycheck";
-      }
-      else if (description == "Giant Eagle") {
-        category = "Groceries";
-      }
-      else if (description == "McDonald's" || description == "Dunkin' Donuts" || description == "Pizza Restaurant") {
-        category = "Takeout";
-      }
-      else if (description == "Sheetz" || description == "Sunoco") {
-        category = "Gas";
-      }
-      else if (description == "Venmo") {
-        category = "Other Income";
-      }
-
-
-      return category;
-    }
-
-    function displayPieChart(transactions) {
-      const rightArea = document.getElementById('right_col');
-      let rentNum = 0, payNum = 0, groceriesNum = 0, takeoutNum = 0, gasNum = 0, otherNum = 0;
-      var chartTitles = [];
-      var uniqueTitle = [];
-      var categoryAmounts = [];
-      transactions.forEach(transaction => {
-        let category = categorizeTransaction(transaction.description);
-        if (category == "Rent") {
-          rentNum += Math.abs(transaction.amount);
-        } else if (category == "Paycheck") {
-          payNum += Math.abs(transaction.amount);
-        } else if (category == "Groceries") {
-          groceriesNum += Math.abs(transaction.amount);
-        } else if (category == "Takeout") {
-          takeoutNum += Math.abs(transaction.amount);
-        } else if (category == "Gas") {
-          gasNum += Math.abs(transaction.amount);
-        } else if (category == "Other Income") {
-          otherNum += Math.abs(transaction.amount);
-        }
-        chartTitles.push(category);
-        uniqueTitle = [...new Set(chartTitles)];
-      });
-      categoryAmounts = [rentNum, payNum, groceriesNum, takeoutNum, gasNum, otherNum];
-      console.log(uniqueTitle);
-      console.log(categoryAmounts);
-
-      rightArea.innerHTML = '';
-
-      var data = [{
-        values: categoryAmounts,
-        labels: uniqueTitle,
-        type: 'pie',
-        hole: .4,
-        textinfo: "label+percent",
-        insidetextorientation: "radial"
-      }];
-
-      var layout = {
-        // title: {
-        // text: 'Expense Info'
-        // },
-        annotations: [
-        {
-          font: {
-            size: 20
-          },
-          showarrow: false,
-          text: 'Current Expenses'
-        }],
-        height: 750,
-        width: 750
-      };
-
-      Plotly.newPlot('right_col', data, layout);
-
-    }
-
-  </script>
 </body>
 
 </html>

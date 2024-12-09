@@ -3,13 +3,29 @@
 * TOP BAR
 ****************************************/
 #title_div {
-  border-style: solid;
   font-size: 25px;
   font-weight: bold;
   text-decoration: underline;
-  border-color: green; /* Border is just for debugging */
   text-align: center;
   padding: 3px 0;
+  border-bottom: solid;
+}
+
+#hamburgerImg {
+  text-align: left;
+  margin-left: 32px;
+  float: left;
+  margin-top: 10px;
+}
+#hamburgerImg img{
+  width: 5%;
+}
+
+#user_info {
+  float: right;
+  text-align: right;
+  line-height: 2px;
+  margin-right: 5px;
 }
 
 
@@ -18,11 +34,7 @@
 * Left Col
 ****************************************/
 #left_col {
-  border-style: solid;
-  border-color: red; /* Border is just for debugging */
-
   display: flex;
-
   float: left;
   width: 20%;
   height: 1500px;
@@ -43,9 +55,6 @@
 * Right Col
 ****************************************/
 #right_col {
-  border-style: solid;
-  border-color: blue; /* Border is just for debugging */
-
   display: flex;
 
   float: right;
