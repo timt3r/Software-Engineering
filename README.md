@@ -6,4 +6,8 @@ To Run it through terminal
 1. "cd Software-Engineering"
 2. "cd Final\ Project/"
 3. python3 -m http.server 8000
-  * Note: If you do not have python3 use whatever version you have installed
+4. In your web browser visit the link provided in terminal, which is provided below
+   - http://[::]:8000/
+6. Refresh the page
+   
+  - Note: If you do not have python3 use whatever version you have installed
